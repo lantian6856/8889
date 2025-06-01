@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>提示</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: sans-serif; background: #fff; text-align: center; padding: 40px; }
+    h1 { font-size: 22px; margin-bottom: 20px; color: #333; }
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #ff2d55;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .tip { margin-top: 20px; color: #888; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>请使用抖音极速版打开本页面</h1>
+  <button id="go">点击继续访问</button>
+  <div class="tip">系统将根据您是否首次访问决定跳转内容</div>
+
+  <script>
+    const ua = navigator.userAgent.toLowerCase();
+    const isLite = ua.includes('aweme') && ua.includes('lite');
+
+    const firstUrl = 'https://vlink.cc/btc518';
+    const repeatUrl = 'https://alidocs.dingtalk.com/i/p/yr9xmyVw3WaVGEOeZxX8vp0M9LvPpG7d';
+
+    document.getElementById('go').onclick = () => {
+      if (!isLite) {
+        alert('请使用抖音极速版打开本页面');
+        return;
+      }
+      const visited = localStorage.getItem('dy_lite_visited');
+      localStorage.setItem('dy_lite_visited', '1');
+      window.location.href = visited ? repeatUrl : firstUrl;
+    };
+  </script>
+</body>
+</html>
